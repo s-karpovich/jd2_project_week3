@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Itemslist.html</title>
+</head>
+
+<body style="background-color:lightgrey;">
+<h2>ITEMS LIST</h2>
+<br/>
+
+
+<a href="/add">Add new Item</a><br/><br/>
+<br/>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Item Name</th>
+        <th>Item Status</th>
+    </tr>
+    <th:block th:each="item : ${items}">
+        <tr>
+            <td th:text="${item.id}">...</td>
+            <td th:text="${item.name}">...</td>
+            <td th:text="${item.status}">...</td>
+        </tr>
+    </th:block>
+</table>
+
+<h1>Change Item Status</h1>
+<form action="#" th:action="@{/change}" th:object="${itemStatusDTO}" method="post">
+
+    <table>
+        <tr>
+            <td>Item ID:</td>
+            <td><input type="text" th:field="*{id}"/></td>
+            <td th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Item ID is incorrect</td>
+        </tr>
+        <tr>
+            <td>New Status:</td>
+            <td><input type="text" th:field="*{newStatus}"/></td>
+            <td th:if="${#fields.hasErrors('newStatus')}" th:errors="*{newStatus}">Status Error</td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Add</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>
